@@ -110,7 +110,7 @@ def test_search_database_urls_default_to_alphafold_v3_archives(monkeypatch):
     module = _reload_with_search_db_env(monkeypatch, {})
 
     assert module.SEARCH_DATABASE_URL == {
-        "pdb_seqres": f"{ALPHAFOLD_DB_ROOT}/pdb_seqres_2022_09_28.fasta.zst",
+        "pdb_seqres": f"{ALPHAFOLD_DB_ROOT}/pdb_seqres.fasta.zst",
         "rfam": (
             f"{ALPHAFOLD_DB_ROOT}/rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta.zst"
         ),

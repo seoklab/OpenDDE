@@ -73,7 +73,7 @@ def search_database_url(filename: str, env_var: str = "") -> str:
 
 SEARCH_DATABASE_URL = {
     "pdb_seqres": search_database_url(
-        "pdb_seqres_2022_09_28.fasta.zst", "OPENDDE_PDB_SEQRES_URL"
+        "pdb_seqres.fasta.zst", "OPENDDE_PDB_SEQRES_URL"
     ),
     "rfam": search_database_url(
         "rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta.zst",

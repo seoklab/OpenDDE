@@ -68,7 +68,7 @@ MSA pairing uses species information from A3M headers. Supported examples:
 Template search uses HMMER (`hmmbuild`, `hmmsearch`) against:
 
 ```text
-$OPENDDE_ROOT_DIR/search_database/pdb_seqres_2022_09_28.fasta
+$OPENDDE_ROOT_DIR/search_database/pdb_seqres.fasta
 ```
 
 Run with explicit tools/database if needed:
@@ -77,7 +77,7 @@ Run with explicit tools/database if needed:
 opendde mt -i examples/input.json -o ./output \
   --hmmsearch_binary_path /path/to/hmmsearch \
   --hmmbuild_binary_path /path/to/hmmbuild \
-  --seqres_database_path /path/to/pdb_seqres_2022_09_28.fasta
+  --seqres_database_path /path/to/pdb_seqres.fasta
 ```
 
 Output: `hmmsearch.a3m`, referenced by `templatesPath`. During prediction,
@@ -112,7 +112,7 @@ archives, which are decompressed to the `.fasta` runtime files below.
 
 | Database | Used by | Size |
 | --- | --- | --- |
-| `pdb_seqres_2022_09_28.fasta` | template | ~220 MB |
+| `pdb_seqres.fasta` | template | ~220 MB |
 | `rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta` | RNA MSA | ~220 MB |
 | `nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta` | RNA MSA | ~75 GB |
 | `rnacentral_active_seq_id_90_cov_80_linclust.fasta` | RNA MSA | ~13 GB |

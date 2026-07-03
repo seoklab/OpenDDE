@@ -83,7 +83,7 @@ def run_template_search(
     if seqres_database_path is None:
         _HOME_DIR = pathlib.Path(os.environ.get("OPENDDE_ROOT_DIR", default_root_dir()))
         _SEQRES_DATABASE_PATH = (
-            _HOME_DIR / "search_database" / "pdb_seqres_2022_09_28.fasta"
+            _HOME_DIR / "search_database" / "pdb_seqres.fasta"
         )
         seqres_database_path = _SEQRES_DATABASE_PATH.as_posix()
     if not os.path.exists(seqres_database_path):

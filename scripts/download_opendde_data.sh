@@ -17,7 +17,7 @@ COMMON_FILES=(
 )
 
 SEARCH_DATABASE_FILES=(
-    "pdb_seqres_2022_09_28.fasta.zst"
+    "pdb_seqres.fasta.zst"
     "nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta.zst"
     "rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta.zst"
     "rnacentral_active_seq_id_90_cov_80_linclust.fasta.zst"
@@ -319,7 +319,7 @@ common_ready() {
 }
 
 search_database_ready() {
-    [[ -f "${OPENDDE_ROOT}/search_database/pdb_seqres_2022_09_28.fasta" \
+    [[ -f "${OPENDDE_ROOT}/search_database/pdb_seqres.fasta" \
         && -f "${OPENDDE_ROOT}/search_database/nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta" \
         && -f "${OPENDDE_ROOT}/search_database/rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta" \
         && -f "${OPENDDE_ROOT}/search_database/rnacentral_active_seq_id_90_cov_80_linclust.fasta" ]]
@@ -378,7 +378,7 @@ if [[ "$DOWNLOAD_COMMON" -eq 1 ]]; then
 fi
 
 if [[ "$DOWNLOAD_SEARCH_DATABASE" -eq 1 ]]; then
-    require_file "${OPENDDE_ROOT}/search_database/pdb_seqres_2022_09_28.fasta"
+    require_file "${OPENDDE_ROOT}/search_database/pdb_seqres.fasta"
     require_file "${OPENDDE_ROOT}/search_database/nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta"
     require_file "${OPENDDE_ROOT}/search_database/rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta"
     require_file "${OPENDDE_ROOT}/search_database/rnacentral_active_seq_id_90_cov_80_linclust.fasta"
@@ -398,7 +398,7 @@ Required runtime layout:
   common/components.cif.rdkit_mol.pkl
   common/release_date_cache.json
   common/obsolete_to_successor.json
-  search_database/pdb_seqres_2022_09_28.fasta
+  search_database/pdb_seqres.fasta
   search_database/nt_rna_2023_02_23_clust_seq_id_90_cov_80_rep_seq.fasta
   search_database/rfam_14_9_clust_seq_id_90_cov_80_rep_seq.fasta
   search_database/rnacentral_active_seq_id_90_cov_80_linclust.fasta

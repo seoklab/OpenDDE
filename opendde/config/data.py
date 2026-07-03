@@ -5,15 +5,8 @@ from typing import Any
 
 
 def default_root_dir() -> str:
-    """Fallback OpenDDE root used when ``OPENDDE_ROOT_DIR`` is unset.
-
-    Resolves to a standard per-user cache directory (``~/.cache/opendde``, honoring
-    ``$XDG_CACHE_HOME``) regardless of install mode. This keeps multi-hundred-MB
-    ``checkpoint/`` and ``common/`` assets out of the user's bare home directory
-    and out of a read-only ``site-packages`` for pip/wheel installs.
-    """
-    cache_home = os.environ.get("XDG_CACHE_HOME") or str(Path.home() / ".cache")
-    return str(Path(cache_home) / "opendde")
+    """Fallback OpenDDE root used when ``OPENDDE_ROOT_DIR`` is unset."""
+    return "/home.galaxy4/share/OpenDDE"
 
 
 OPENDDE_ROOT_DIR = os.environ.get("OPENDDE_ROOT_DIR", default_root_dir())
