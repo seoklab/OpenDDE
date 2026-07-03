@@ -29,7 +29,7 @@ data_configs: dict[str, Any] = {
         "max_templates": 4,
         "fetch_remote": True,
         "prot_template_mmcif_dir": os.path.join(SEARCH_DATABASE_ROOT, "mmcif"),
-        "prot_template_cache_dir": os.path.join(SEARCH_DATABASE_ROOT, "template_cache"),
+        "prot_template_cache_dir": "",
         "kalign_binary_path": "kalign",
         "release_dates_path": os.path.join(DATA_ROOT, "common/release_date_cache.json"),
         "obsolete_pdbs_path": os.path.join(
