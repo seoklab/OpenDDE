@@ -1,0 +1,14 @@
+name: opendde
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - python=3.11
+  - cuda-nvcc=12.8
+  - cuda-libraries-dev=12.8
+  - gcc_linux-64=13
+  - gxx_linux-64=13
+  - hmmer=3.4
+  - zstandard>=0.23
+  - zlib
+  - pip
