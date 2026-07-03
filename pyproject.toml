@@ -34,7 +34,7 @@ classifiers = [
 ]
 
 dependencies = [
-  "torch==2.7.1",
+  "torch==2.12.1",
   "torchvision==0.22.1",
   "torchaudio==2.7.1",
   "click>=8.1.0",
