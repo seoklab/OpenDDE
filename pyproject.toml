@@ -60,22 +60,10 @@ dependencies = [
   "numpy==2.4.1",
   "networkx>=3.4.2",
   "requests>=2.31.0",
-]
-
-[project.optional-dependencies]
-cpu = []
-gpu = [
   "cuequivariance-ops-torch-cu12==0.8.0; platform_system == 'Linux'",
   "cuequivariance-torch==0.8.0; platform_system == 'Linux'",
   "triton==3.3.1; platform_system == 'Linux'",
 ]
-
-[project.urls]
-Homepage = "https://github.com/aurainfra/opendde"
-Repository = "https://github.com/aurainfra/opendde"
-Documentation = "https://github.com/aurainfra/opendde/tree/main/docs"
-Issues = "https://github.com/aurainfra/opendde/issues"
-Changelog = "https://github.com/aurainfra/opendde/blob/main/CHANGELOG.md"
 
 [project.scripts]
 opendde = "runner.batch_inference:opendde_cli"
