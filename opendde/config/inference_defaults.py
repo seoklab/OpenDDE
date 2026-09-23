@@ -13,6 +13,7 @@ inference_configs: dict[str, Any] = {
     "seeds": ListValue([], dtype=int),
     "dump_dir": "./output",
     "need_atom_confidence": False,
+    "confidence_format": "npz",
     "sorted_by_ranking_score": True,
     "input_json_path": RequiredValue(str),
     "load_checkpoint_dir": os.path.join(OPENDDE_ROOT_DIR, "checkpoint"),

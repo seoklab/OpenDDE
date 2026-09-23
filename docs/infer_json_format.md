@@ -173,9 +173,12 @@ The inference-only build ignores legacy `constraint` fields. Use
 ```text
 <out_dir>/<job_name>/seed_<seed>/predictions/
 ├── <job_name>_sample_<rank>.cif
-├── <job_name>_summary_confidence_sample_<rank>.json
-└── <job_name>_full_data_sample_<rank>.json   # only when --need_atom_confidence true
+├── <job_name>_summary_confidence_sample_<rank>.npz
+└── <job_name>_full_data_sample_<rank>.npz   # only when --need_atom_confidence true
 ```
 
-The summary JSON includes confidence metrics such as `plddt`, `gpde`, `ptm`,
+Confidence files are written as compressed `.npz` by default; use
+`--confidence_format json` to write `.json` instead.
+
+The summary file includes confidence metrics such as `plddt`, `gpde`, `ptm`,
 `iptm`, clash flags, and `ranking_score` when available.

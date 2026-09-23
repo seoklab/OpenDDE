@@ -336,6 +336,7 @@ class OpenDDEConfig(BaseConfig):
     seeds: list[int]
     dump_dir: str
     need_atom_confidence: bool
+    confidence_format: Literal["npz", "json"]
     sorted_by_ranking_score: bool
     input_json_path: Optional[str]
     load_checkpoint_dir: str
