@@ -7,7 +7,7 @@ import torch
 from biotite.structure import AtomArray
 
 from opendde.data.utils import save_structure_cif
-from opendde.utils.file_io import save_json
+from opendde.utils.file_io import save_json, save_npz
 from opendde.utils.torch_utils import round_values
 
 
@@ -39,6 +39,7 @@ class DataDumper:
         base_dir (str): Base directory for saving dumped data.
         need_atom_confidence (bool): Whether to save detailed atom-level confidence data.
         sorted_by_ranking_score (bool): Whether to sort output files by ranking score.
+        confidence_format (str): File format for confidence outputs, "npz" or "json".
     """
 
     def __init__(
@@ -46,10 +47,12 @@ class DataDumper:
         base_dir: str,
         need_atom_confidence: bool = False,
         sorted_by_ranking_score: bool = True,
+        confidence_format: str = "npz",
     ) -> None:
         self.base_dir = base_dir
         self.need_atom_confidence = need_atom_confidence
         self.sorted_by_ranking_score = sorted_by_ranking_score
+        self.confidence_format = confidence_format
 
     def dump(
         self,
@@ -229,7 +232,7 @@ class DataDumper:
         sorted_indices: Optional[List[int]],
     ):
         """
-        Save confidence data to JSON files.
+        Save confidence data to NPZ or JSON files.
 
         Args:
             data (dict): Prediction results containing confidence scores.
@@ -246,15 +249,23 @@ class DataDumper:
                 )
         if sorted_indices is None:
             sorted_indices = list(range(N_sample))
+        use_npz = self.confidence_format == "npz"
+        suffix = "npz" if use_npz else "json"
         for idx, rank in enumerate(sorted_indices):
             output_fpath = os.path.join(
                 prediction_save_dir,
-                f"{sample_name}_summary_confidence_sample_{rank}.json",
+                f"{sample_name}_summary_confidence_sample_{rank}.{suffix}",
             )
-            save_json(data["summary_confidence"][idx], output_fpath, indent=4)
+            if use_npz:
+                save_npz(data["summary_confidence"][idx], output_fpath)
+            else:
+                save_json(data["summary_confidence"][idx], output_fpath, indent=4)
             if self.need_atom_confidence:
                 output_fpath = os.path.join(
                     prediction_save_dir,
-                    f"{sample_name}_full_data_sample_{rank}.json",
+                    f"{sample_name}_full_data_sample_{rank}.{suffix}",
                 )
-                save_json(data["full_data"][idx], output_fpath, indent=None)
+                if use_npz:
+                    save_npz(data["full_data"][idx], output_fpath)
+                else:
+                    save_json(data["full_data"][idx], output_fpath, indent=None)

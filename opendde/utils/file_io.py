@@ -12,6 +12,7 @@ import hashlib
 import os
 from pathlib import Path
 
+import numpy as np
 import torch
 
 from opendde.utils.logger import get_logger
@@ -213,6 +214,17 @@ def save_json(data, output_fpath, indent=4):
             json.dump(data_json, f, indent=indent)
         else:
             json.dump(data_json, f)
+
+
+def save_npz(data, output_fpath):
+    arrays = {}
+    for key, value in data.items():
+        if isinstance(value, torch.Tensor):
+            if value.dtype == torch.bfloat16:
+                value = value.float()
+            value = value.cpu().numpy()
+        arrays[key] = np.asarray(value)
+    np.savez_compressed(output_fpath, **arrays)
 
 
 def save_tensor(data, output_fpath):

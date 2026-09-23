@@ -67,6 +67,7 @@ class InferenceRunner(object):
         self.init_dumper(
             need_atom_confidence=configs.need_atom_confidence,
             sorted_by_ranking_score=configs.sorted_by_ranking_score,
+            confidence_format=configs.confidence_format,
         )
 
     def init_env(self) -> None:
@@ -157,7 +158,10 @@ class InferenceRunner(object):
         self.print(f"Model parameters: {count_parameters(self.model):.2f}M")
 
     def init_dumper(
-        self, need_atom_confidence: bool = False, sorted_by_ranking_score: bool = True
+        self,
+        need_atom_confidence: bool = False,
+        sorted_by_ranking_score: bool = True,
+        confidence_format: str = "npz",
     ) -> None:
         """
         Initialize the data dumper for saving predictions.
@@ -165,11 +169,13 @@ class InferenceRunner(object):
         Args:
             need_atom_confidence (bool): Whether to dump atom-level confidence.
             sorted_by_ranking_score (bool): Whether to sort results by ranking score.
+            confidence_format (str): File format for confidence outputs, "npz" or "json".
         """
         self.dumper = DataDumper(
             base_dir=self.dump_dir,
             need_atom_confidence=need_atom_confidence,
             sorted_by_ranking_score=sorted_by_ranking_score,
+            confidence_format=confidence_format,
         )
 
     @torch.no_grad()

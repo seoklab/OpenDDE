@@ -276,6 +276,7 @@ def get_default_runner(
     use_template: bool = False,
     use_rna_msa: bool = False,
     need_atom_confidence: bool = False,
+    confidence_format: Literal["npz", "json"] = "npz",
     kalign_binary_path: Optional[str] = None,
     use_tfg_guidance: bool = False,
     foldcp_mode: Literal["single", "distributed"] = "single",
@@ -352,6 +353,7 @@ def get_default_runner(
     configs.use_template = use_template
     configs.use_rna_msa = use_rna_msa
     configs.need_atom_confidence = need_atom_confidence
+    configs.confidence_format = confidence_format
     configs.sample_diffusion.guidance["enable"] = use_tfg_guidance
     configs = apply_foldcp_config(configs, foldcp_config)
 
@@ -436,6 +438,7 @@ def inference_jsons(
     use_rna_msa: bool = False,
     msa_server_mode: Optional[str] = None,
     need_atom_confidence: bool = False,
+    confidence_format: Literal["npz", "json"] = "npz",
     kalign_binary_path: Optional[str] = None,
     use_tfg_guidance: bool = False,
     hmmsearch_binary_path: Optional[str] = None,
@@ -531,6 +534,7 @@ def inference_jsons(
         use_template=use_template,
         use_rna_msa=use_rna_msa,
         need_atom_confidence=need_atom_confidence,
+        confidence_format=confidence_format,
         kalign_binary_path=kalign_binary_path,
         use_tfg_guidance=use_tfg_guidance,
         foldcp_mode=foldcp_mode,
@@ -718,6 +722,12 @@ def doctor() -> None:
     help="Whether to compute atom-level confidence scores.",
 )
 @click.option(
+    "--confidence_format",
+    type=click.Choice(["npz", "json"]),
+    default="npz",
+    help="File format for confidence outputs.",
+)
+@click.option(
     "--foldcp_mode",
     type=click.Choice(["single", "distributed"]),
     default="single",
@@ -841,6 +851,7 @@ def predict(
     use_rna_msa: bool,
     msa_server_mode: Optional[str],
     need_atom_confidence: bool,
+    confidence_format: Literal["npz", "json"] = "npz",
     kalign_binary_path: Optional[str] = None,
     use_tfg_guidance: bool = False,
     hmmsearch_binary_path: Optional[str] = None,
@@ -885,6 +896,7 @@ def predict(
         use_rna_msa (bool): Use RNA MSA.
         msa_server_mode (Optional[str]): Deprecated compatibility option; ignored.
         need_atom_confidence (bool): Compute atom-level confidence scores.
+        confidence_format (str): File format for confidence outputs.
         kalign_binary_path (Optional[str]): Path to kalign binary.
         use_tfg_guidance (bool): Use TFG guidance.
         hmmsearch_binary_path (Optional[str]): Path to hmmsearch binary.
@@ -983,6 +995,7 @@ def predict(
         use_rna_msa=use_rna_msa,
         msa_server_mode=msa_server_mode,
         need_atom_confidence=need_atom_confidence,
+        confidence_format=confidence_format,
         kalign_binary_path=kalign_binary_path,
         use_tfg_guidance=use_tfg_guidance,
         hmmsearch_binary_path=hmmsearch_binary_path,
